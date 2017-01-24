@@ -33,14 +33,11 @@ import com.github.mobile.ui.comment.CommentPreviewPagerAdapter;
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.Repository;
 
-import com.github.mobile.ui.comment.OnCreateComment;
-
 /**
  * Activity to create a comment on a commit
  */
 public class CreateCommentActivity extends
-        com.github.mobile.ui.comment.CreateCommentActivity
-        implements OnCreateComment {
+        com.github.mobile.ui.comment.CreateCommentActivity {
 
     /**
      * Create intent to create a comment
@@ -101,7 +98,7 @@ public class CreateCommentActivity extends
     }
 
     @Override
-    public void createComment(String comment) {
+    protected void createComment(String comment) {
         CommitComment commitComment = new CommitComment();
         commitComment.setBody(comment);
         if (isLineComment(path, position))

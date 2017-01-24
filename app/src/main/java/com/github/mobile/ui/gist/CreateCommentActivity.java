@@ -28,14 +28,11 @@ import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.User;
 
-import com.github.mobile.ui.comment.OnCreateComment;
-
 /**
  * Activity to create a comment on a {@link Gist}
  */
 public class CreateCommentActivity extends
-        com.github.mobile.ui.comment.CreateCommentActivity
-        implements OnCreateComment {
+        com.github.mobile.ui.comment.CreateCommentActivity {
 
     /**
      * Create intent to create a comment
@@ -66,7 +63,7 @@ public class CreateCommentActivity extends
     }
 
     @Override
-    public void createComment(String comment) {
+    protected void createComment(String comment) {
         new CreateCommentTask(this, gist.getId(), comment) {
 
             @Override

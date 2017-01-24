@@ -35,14 +35,11 @@ import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.User;
 
-import com.github.mobile.ui.comment.OnCreateComment;
-
 /**
  * Activity to create a comment on an {@link Issue}
  */
 public class CreateCommentActivity extends
-        com.github.mobile.ui.comment.CreateCommentActivity
-        implements OnCreateComment{
+        com.github.mobile.ui.comment.CreateCommentActivity {
 
     /**
      * Create intent to create a comment
@@ -99,7 +96,7 @@ public class CreateCommentActivity extends
     }
 
     @Override
-    public void createComment(String commentText) {
+    protected void createComment(String commentText) {
         if (comment != null) {
             comment.setBody(commentText);
 
