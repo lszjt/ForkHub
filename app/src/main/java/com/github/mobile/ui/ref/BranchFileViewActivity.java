@@ -52,12 +52,13 @@ import com.google.inject.Inject;
 import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.util.EncodingUtils;
+import com.github.mobile.ui.FileViewActivity;
 
 /**
  * Activity to view a file on a branch
  */
-public class BranchFileViewActivity extends BaseActivity implements
-        LoaderCallbacks<CharSequence> {
+public class BranchFileViewActivity extends BaseActivity
+        implements LoaderCallbacks<CharSequence>, FileViewActivity{
 
     private static final String TAG = "BranchFileViewActivity";
 
@@ -249,7 +250,8 @@ public class BranchFileViewActivity extends BaseActivity implements
         getSupportLoaderManager().restartLoader(0, args, this);
     }
 
-    private void loadContent() {
+    @Override
+    public void loadContent() {
         ViewUtils.setGone(loadingBar, false);
         ViewUtils.setGone(codeView, true);
 

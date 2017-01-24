@@ -53,12 +53,12 @@ import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.util.EncodingUtils;
-
+import com.github.mobile.ui.FileViewActivity;
 /**
  * Activity to display the contents of a file in a commit
  */
 public class CommitFileViewActivity extends BaseActivity implements
-        LoaderCallbacks<CharSequence> {
+        LoaderCallbacks<CharSequence>, FileViewActivity {
 
     private static final String TAG = "CommitFileViewActivity";
 
@@ -256,7 +256,8 @@ public class CommitFileViewActivity extends BaseActivity implements
         getSupportLoaderManager().restartLoader(0, args, this);
     }
 
-    private void loadContent() {
+    @Override
+    public void loadContent() {
         new RefreshBlobTask(repo, sha, this) {
 
             @Override
