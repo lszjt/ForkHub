@@ -57,12 +57,9 @@ import com.github.mobile.ui.FileViewActivity;
 /**
  * Activity to display the contents of a file in a commit
  */
-<<<<<<< HEAD
-public class CommitFileViewActivity extends BaseActivity {
-=======
+
 public class CommitFileViewActivity extends BaseActivity implements
         LoaderCallbacks<CharSequence>, FileViewActivity {
->>>>>>> 2844dfdb32546771495aaf1f1422bd0f2087c8e2
 
     private static final String TAG = "CommitFileViewActivity";
 
@@ -95,8 +92,6 @@ public class CommitFileViewActivity extends BaseActivity implements
 
 
     private boolean isMarkdownFile;
-
-
 
 
     private SourceEditor editor;
