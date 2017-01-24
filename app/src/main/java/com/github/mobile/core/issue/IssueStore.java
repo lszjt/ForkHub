@@ -154,6 +154,9 @@ public class IssueStore extends ItemStore {
     }
 
     private RepositoryIssue copyIssue(RepositoryIssue to, Issue from) {
+
+        // TODO：
+        // SAMPLE for TMI
         to.setId(from.getId());
         to.setUser(from.getUser());
         to.setAssignee(from.getAssignee());
