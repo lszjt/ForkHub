@@ -56,12 +56,10 @@ import org.eclipse.egit.github.core.util.EncodingUtils;
 /**
  * Activity to view a file on a branch
  */
-public class BranchFileViewActivity extends BaseActivity implements
-        LoaderCallbacks<CharSequence> {
+public class BranchFileViewActivity extends BaseActivity  {
 
     private static final String TAG = "BranchFileViewActivity";
 
-    private static final String ARG_TEXT = "text";
 
     /**
      * Create intent to show file in commit
@@ -88,29 +86,19 @@ public class BranchFileViewActivity extends BaseActivity implements
 
     private String path;
 
-    private String file;
+
 
     private String branch;
 
     private boolean isMarkdownFile;
 
-    private String renderedMarkdown;
-
-    private Blob blob;
-
-    private ProgressBar loadingBar;
-
-    private WebView codeView;
 
     private SourceEditor editor;
 
-    private MenuItem markdownItem;
 
     @Inject
     private AvatarLoader avatars;
 
-    @Inject
-    private HttpImageGetter imageGetter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,28 +193,6 @@ public class BranchFileViewActivity extends BaseActivity implements
         }
     }
 
-    @Override
-    public Loader<CharSequence> onCreateLoader(int loader, Bundle args) {
-        final String raw = args.getString(ARG_TEXT);
-        return new MarkdownLoader(this, null, raw, imageGetter, false);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<CharSequence> loader,
-            CharSequence rendered) {
-        if (rendered == null)
-            ToastUtils.show(this, R.string.error_rendering_markdown);
-
-        ViewUtils.setGone(loadingBar, true);
-        ViewUtils.setGone(codeView, false);
-
-        if (!TextUtils.isEmpty(rendered)) {
-            renderedMarkdown = rendered.toString();
-            if (markdownItem != null)
-                markdownItem.setEnabled(true);
-            editor.setMarkdown(true).setSource(file, renderedMarkdown, false);
-        }
-    }
 
     @Override
     public void onLoaderReset(Loader<CharSequence> loader) {
@@ -234,20 +200,12 @@ public class BranchFileViewActivity extends BaseActivity implements
 
     private void shareFile() {
         String id = repo.generateId();
-        startActivity(ShareUtils.create(path + " at " + branch + " on " + id,
+        startActivity(ShareUtils.create(
+                path + " at " + branch + " on " + id,
                 "https://github.com/" + id + "/blob/" + branch + '/' + path));
     }
 
-    private void loadMarkdown() {
-        ViewUtils.setGone(loadingBar, false);
-        ViewUtils.setGone(codeView, true);
 
-        String markdown = new String(
-                EncodingUtils.fromBase64(blob.getContent()));
-        Bundle args = new Bundle();
-        args.putCharSequence(ARG_TEXT, markdown);
-        getSupportLoaderManager().restartLoader(0, args, this);
-    }
 
     private void loadContent() {
         ViewUtils.setGone(loadingBar, false);
