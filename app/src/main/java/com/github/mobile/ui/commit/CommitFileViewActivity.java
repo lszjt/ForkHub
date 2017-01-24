@@ -206,7 +206,8 @@ public class CommitFileViewActivity extends BaseActivity implements
     public void onLoaderReset(Loader<CharSequence> loader) {
     }
 
-    private void shareFile() {
+    @Override
+    public void shareFile() {
         String id = repo.generateId();
         startActivity(ShareUtils.create(
                 path + " at " + CommitUtils.abbreviate(commit) + " on " + id,

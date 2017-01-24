@@ -7,4 +7,6 @@ package com.github.mobile.ui;
 public interface FileViewActivity {
 
     void loadContent();
+
+    void shareFile();
 }
