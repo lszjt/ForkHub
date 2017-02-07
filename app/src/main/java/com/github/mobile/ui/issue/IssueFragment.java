@@ -77,6 +77,7 @@ import com.github.mobile.ui.HeaderFooterListAdapter;
 import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.UriLauncherActivity;
+import com.github.mobile.ui.comment.Interface_B;
 import com.github.mobile.ui.commit.CommitCompareViewActivity;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -105,7 +106,7 @@ import org.eclipse.egit.github.core.User;
 /**
  * Fragment to display an issue
  */
-public class IssueFragment extends DialogFragment {
+public class IssueFragment extends DialogFragment implements Interface_Comment{
 
     private int issueNumber;
 
@@ -608,6 +609,7 @@ public class IssueFragment extends DialogFragment {
     /**
      * Edit existing comment
      */
+    @Override
     public void editComment(Comment comment) {
         startActivityForResult(
                 CreateCommentActivity.createIntent(repositoryId, issueNumber, user, comment),
@@ -617,6 +619,7 @@ public class IssueFragment extends DialogFragment {
     /**
      * Delete existing comment
      */
+    @Override
     public void deleteComment(Comment comment) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_COMMENT, comment);

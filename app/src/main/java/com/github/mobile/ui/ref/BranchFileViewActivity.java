@@ -57,12 +57,10 @@ import com.github.mobile.ui.FileViewActivity;
 /**
  * Activity to view a file on a branch
  */
-<<<<<<< HEAD
-public class BranchFileViewActivity extends BaseActivity  {
-=======
+
 public class BranchFileViewActivity extends BaseActivity
         implements LoaderCallbacks<CharSequence>, FileViewActivity{
->>>>>>> 2844dfdb32546771495aaf1f1422bd0f2087c8e2
+
 
     private static final String TAG = "BranchFileViewActivity";
 
