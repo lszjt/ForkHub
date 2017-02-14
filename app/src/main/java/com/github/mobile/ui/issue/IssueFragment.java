@@ -74,6 +74,7 @@ import com.github.mobile.ui.ConfirmDialogFragment;
 import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.HeaderFooterListAdapter;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.UriLauncherActivity;
@@ -356,8 +357,9 @@ public class IssueFragment extends DialogFragment implements Interface_Comment{
 
         Activity activity = getActivity();
         loggedUser = AccountUtils.getLogin(activity);
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
         adapter = new HeaderFooterListAdapter<EventListAdapter>(list,
-                new EventListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
+                listAdapterFactory.newListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
         list.setAdapter(adapter);
     }
 

@@ -69,6 +69,8 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
     @Inject
     private AvatarLoader avatars;
 
+    private ListAdapterFactory listAdapterFactory;
+
     /**
      * Event service
      */
@@ -284,7 +286,8 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
 
     @Override
     protected SingleTypeAdapter<Event> createAdapter(List<Event> items) {
-        return new NewsListAdapter(getActivity().getLayoutInflater(),
+        listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(),
                 items.toArray(new Event[items.size()]), avatars, showRepoName);
     }
 

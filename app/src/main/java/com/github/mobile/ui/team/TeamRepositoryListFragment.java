@@ -25,6 +25,7 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.github.mobile.ui.repo.UserRepositoryListAdapter;
 import com.google.inject.Inject;
@@ -75,7 +76,8 @@ public class TeamRepositoryListFragment extends ItemListFragment<Repository> {
 
     @Override
     protected SingleTypeAdapter<Repository> createAdapter(List<Repository> items) {
-        return new UserRepositoryListAdapter(getActivity().getLayoutInflater(),
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(),
                 items.toArray(new Repository[items.size()]), org);
     }
 

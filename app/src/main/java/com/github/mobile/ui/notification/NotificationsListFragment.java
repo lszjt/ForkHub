@@ -29,6 +29,7 @@ import com.github.mobile.api.model.Subject;
 import com.github.mobile.api.service.NotificationService;
 import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.core.ResourcePager;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.ui.UriLauncherActivity;
 import com.google.inject.Inject;
@@ -133,7 +134,8 @@ public class NotificationsListFragment extends PagedItemFragment<Notification> {
 
     @Override
     protected SingleTypeAdapter<Notification> createAdapter(List<Notification> items) {
-        return new NotificationsListAdapter(getActivity(),
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity(),
                 items.toArray(new Notification[items.size()]));
     }
 }

@@ -31,6 +31,7 @@ import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.repo.RefreshRepositoryTask;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.google.inject.Inject;
@@ -178,7 +179,8 @@ public class SearchRepositoryListFragment extends PagedItemFragment<Repository> 
     @Override
     protected SingleTypeAdapter<Repository> createAdapter(
             List<Repository> items) {
-        return new SearchRepositoryListAdapter(getActivity()
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity()
                 .getLayoutInflater(), items.toArray(new Repository[items
                 .size()]));
     }

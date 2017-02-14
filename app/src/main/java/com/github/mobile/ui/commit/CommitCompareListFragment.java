@@ -40,6 +40,7 @@ import com.github.mobile.core.commit.CommitCompareTask;
 import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.HeaderFooterListAdapter;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
@@ -171,7 +172,8 @@ public class CommitCompareListFragment extends DialogFragment implements
                             getString(R.string.comparing_commits), commits.size()));
             adapter.addHeader(commitHeader);
             adapter.addHeader(inflater.inflate(R.layout.list_divider, null));
-            CommitListAdapter commitAdapter = new CommitListAdapter(
+            ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+            CommitListAdapter commitAdapter = listAdapterFactory.newListAdapter(
                     R.layout.commit_item, inflater, getResources(), commits, avatars);
             for (int i = 0; i < commits.size(); i++) {
                 RepositoryCommit commit = commits.get(i);

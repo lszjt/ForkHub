@@ -29,6 +29,7 @@ import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.ResourcePager;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
@@ -127,7 +128,8 @@ public class DashboardIssueFragment extends PagedItemFragment<Issue> {
     @Override
     protected SingleTypeAdapter<Issue> createAdapter(
             List<Issue> items) {
-        return new DashboardIssueListAdapter(avatars, getActivity().getResources(),
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(avatars, getActivity().getResources(),
                 getActivity().getLayoutInflater(),
                 items.toArray(new Issue[items.size()]));
     }
