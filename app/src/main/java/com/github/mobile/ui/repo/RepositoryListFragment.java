@@ -36,6 +36,7 @@ import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.HeaderFooterListAdapter;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.LightAlertDialog;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.user.OrganizationSelectionListener;
 import com.github.mobile.ui.user.OrganizationSelectionProvider;
 import com.github.mobile.ui.user.UserViewActivity;
@@ -291,7 +292,8 @@ public class RepositoryListFragment extends ItemListFragment<Repository>
 
     @Override
     protected SingleTypeAdapter<Repository> createAdapter(List<Repository> items) {
-        return new DefaultRepositoryListAdapter(getActivity()
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity()
                 .getLayoutInflater(),
                 items.toArray(new Repository[items.size()]), org);
     }

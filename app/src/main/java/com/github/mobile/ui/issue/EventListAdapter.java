@@ -52,7 +52,7 @@ public class EventListAdapter extends MultiTypeAdapter {
 
     private final HttpImageGetter imageGetter;
 
-    private final IssueFragment issueFragment;
+    private final Interface_Comment issueFragment;
 
     private final String user;
 

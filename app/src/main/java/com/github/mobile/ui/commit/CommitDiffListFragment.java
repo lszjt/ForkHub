@@ -57,6 +57,7 @@ import com.github.mobile.core.commit.RefreshCommitTask;
 import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.HeaderFooterListAdapter;
 import com.github.mobile.ui.LightAlertDialog;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -384,8 +385,9 @@ public class CommitDiffListFragment extends DialogFragment implements
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
         adapter = new HeaderFooterListAdapter<CommitFileListAdapter>(list,
-                new CommitFileListAdapter(inflater, diffStyler, avatars,
+                listAdapterFactory.newListAdapter(inflater, diffStyler, avatars,
                         commentImageGetter));
         adapter.addFooter(inflater.inflate(R.layout.footer_separator, null));
         list.setAdapter(adapter);

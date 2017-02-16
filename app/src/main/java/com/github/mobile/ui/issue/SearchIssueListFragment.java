@@ -27,6 +27,7 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
@@ -117,7 +118,8 @@ public class SearchIssueListFragment extends ItemListFragment<SearchIssue>
     @Override
     protected SingleTypeAdapter<SearchIssue> createAdapter(
             List<SearchIssue> items) {
-        return new SearchIssueListAdapter(getActivity().getLayoutInflater(),
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(),
                 getActivity().getResources(),
                 items.toArray(new SearchIssue[items.size()]), avatars);
     }

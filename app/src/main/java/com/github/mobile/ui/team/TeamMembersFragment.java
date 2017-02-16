@@ -26,6 +26,7 @@ import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.user.UserListAdapter;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -50,6 +51,9 @@ public class TeamMembersFragment extends ItemListFragment<User> {
 
     @Inject
     private TeamService service;
+
+    @Inject
+    private ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
 
     private Team team;
 
@@ -84,7 +88,7 @@ public class TeamMembersFragment extends ItemListFragment<User> {
     @Override
     protected SingleTypeAdapter<User> createAdapter(List<User> items) {
         User[] users = items.toArray(new User[items.size()]);
-        return new UserListAdapter(getActivity().getLayoutInflater(), users,
+        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(), users,
                 avatars);
     }
 

@@ -58,8 +58,15 @@ import com.github.mobile.ui.FileViewActivity;
  * Activity to display the contents of a file in a commit
  */
 
+<<<<<<< HEAD
 public class CommitFileViewActivity extends BaseActivity implements
         LoaderCallbacks<CharSequence>, FileViewActivity {
+=======
+
+public class CommitFileViewActivity extends BaseActivity implements
+        LoaderCallbacks<CharSequence>, FileViewActivity {
+
+>>>>>>> lab4
 
     private static final String TAG = "CommitFileViewActivity";
 

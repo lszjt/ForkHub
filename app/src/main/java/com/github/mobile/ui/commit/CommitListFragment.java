@@ -42,6 +42,7 @@ import com.github.mobile.core.ref.RefUtils;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.DialogResultListener;
 import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.ui.ref.RefDialog;
 import com.github.mobile.ui.ref.RefDialogFragment;
@@ -191,7 +192,8 @@ public class CommitListFragment extends PagedItemFragment<RepositoryCommit>
     @Override
     protected SingleTypeAdapter<RepositoryCommit> createAdapter(
             List<RepositoryCommit> items) {
-        return new CommitListAdapter(R.layout.commit_item, getActivity()
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(R.layout.commit_item, getActivity()
                 .getLayoutInflater(), getResources(), items, avatars);
     }
 

@@ -12,6 +12,7 @@ import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
@@ -74,7 +75,8 @@ public class FilterListFragment extends ItemListFragment<IssueFilter> implements
     @Override
     protected SingleTypeAdapter<IssueFilter> createAdapter(
             List<IssueFilter> items) {
-        return new FilterListAdapter(getActivity().getLayoutInflater(),
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(),
                 items.toArray(new IssueFilter[items.size()]), avatars);
     }
 

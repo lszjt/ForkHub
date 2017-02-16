@@ -22,6 +22,7 @@ import com.github.mobile.accounts.AccountScope;
 import com.github.mobile.accounts.GitHubAccount;
 import com.github.mobile.api.DateAdapter;
 import com.github.mobile.api.RequestConfiguration;
+import com.github.mobile.core.StoreFactory;
 import com.github.mobile.core.commit.CommitStore;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.core.issue.IssueStore;
@@ -58,6 +59,8 @@ public class GitHubModule extends AbstractModule {
     private WeakReference<GistStore> gists;
 
     private WeakReference<CommitStore> commits;
+
+    private StoreFactory storeFactory = new StoreFactory();
 
     @Override
     protected void configure() {
@@ -102,7 +105,7 @@ public class GitHubModule extends AbstractModule {
             PullRequestService pullService) {
         IssueStore store = issues != null ? issues.get() : null;
         if (store == null) {
-            store = new IssueStore(issueService, pullService);
+            store = storeFactory.newStore(issueService, pullService);
             issues = new WeakReference<IssueStore>(store);
         }
         return store;
@@ -112,7 +115,7 @@ public class GitHubModule extends AbstractModule {
     GistStore gistStore(GistService service) {
         GistStore store = gists != null ? gists.get() : null;
         if (store == null) {
-            store = new GistStore(service);
+            store = storeFactory.newStore(service);
             gists = new WeakReference<GistStore>(store);
         }
         return store;
@@ -122,7 +125,7 @@ public class GitHubModule extends AbstractModule {
     CommitStore commitStore(CommitService service) {
         CommitStore store = commits != null ? commits.get() : null;
         if (store == null) {
-            store = new CommitStore(service);
+            store = storeFactory.newStore(service);
             commits = new WeakReference<CommitStore>(store);
         }
         return store;

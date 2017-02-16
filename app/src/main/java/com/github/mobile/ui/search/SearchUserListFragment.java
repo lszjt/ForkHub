@@ -29,6 +29,7 @@ import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.user.RefreshUserTask;
+import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -108,7 +109,8 @@ public class SearchUserListFragment extends PagedItemFragment<User> {
 
     @Override
     protected SingleTypeAdapter<User> createAdapter(List<User> items) {
-        return new SearchUserListAdapter(getActivity(),
+        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
+        return listAdapterFactory.newListAdapter(getActivity(),
                 items.toArray(new User[items.size()]), avatars);
     }
 
