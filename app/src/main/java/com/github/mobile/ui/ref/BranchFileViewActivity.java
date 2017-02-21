@@ -60,10 +60,6 @@ import com.github.mobile.ui.FileViewActivity;
 
 public class BranchFileViewActivity extends BaseActivity
         implements LoaderCallbacks<CharSequence>, FileViewActivity{
-<<<<<<< HEAD
-=======
-
->>>>>>> lab4
 
     private static final String TAG = "BranchFileViewActivity";
 
