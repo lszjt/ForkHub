@@ -29,6 +29,7 @@ import com.google.inject.Inject;
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.service.IssueService;
+import com.github.mobile.apectj.Ex;
 
 /**
  * Task to comment on an issue in a repository
@@ -87,10 +88,11 @@ public class CreateCommentTask extends ProgressDialogTask<Comment> {
     }
 
     @Override
+    @Ex(tag = TAG, msg = "Exception creating comment on issue")
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.d(TAG, "Exception creating comment on issue", e);
+        //Log.d(TAG, "Exception creating comment on issue", e);
 
         ToastUtils.show((Activity) getContext(), e.getMessage());
     }

@@ -5,13 +5,13 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+//import java.io.IOException;
+import android.util.Log;
+import java.lang.reflect.Method;
 
-/**
- * Created by Prateek on 2/12/2017.
- */
 @Aspect
-public class TraceAspect {
-    private static final String POINTCUT_METHOD = "execution(void on*(..))";
+public class ExAspect {
+    private static final String POINTCUT_METHOD = "execution(void onException*(..))";
 
     private static final String POINTCUT_CONSTRUCTOR =
             "execution(@org.github.mobile.aspectj.DebugTrace *.new(..))";
@@ -28,25 +28,16 @@ public class TraceAspect {
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
 
-        final StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
+        Method method = methodSignature.getMethod();
+        Ex myAnnotation = method.getAnnotation(Ex.class);
+        String tag = myAnnotation.tag();
+        String msg = myAnnotation.msg();
+        Object[] args = joinPoint.getArgs();
+        Exception e = (Exception) args[0];
         Object result = joinPoint.proceed();
-        stopWatch.stop();
-
-        DebugLog.log(className, buildLogMessage(methodName, stopWatch.getTotalTimeMillis()));
+        Log.d(className, msg+tag, e);
 
         return result;
     }
-    private static String buildLogMessage(String methodName, long methodDuration) {
-        StringBuilder message = new StringBuilder();
-        message.append("Gintonic --> ");
-        message.append(methodName);
-        message.append(" --> ");
-        message.append("[");
-        message.append(methodDuration);
-        message.append("ms");
-        message.append("]");
 
-        return message.toString();
-    }
 }
