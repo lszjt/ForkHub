@@ -26,7 +26,6 @@ import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.ItemListFragment;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
@@ -48,8 +47,6 @@ public class OrgMembersFragment extends ItemListFragment<User> implements
 
     @Inject
     private AvatarLoader avatars;
-
-    private ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -91,7 +88,7 @@ public class OrgMembersFragment extends ItemListFragment<User> implements
     @Override
     protected SingleTypeAdapter<User> createAdapter(List<User> items) {
         User[] users = items.toArray(new User[items.size()]);
-        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(), users,
+        return new UserListAdapter(getActivity().getLayoutInflater(), users,
                 avatars);
     }
 

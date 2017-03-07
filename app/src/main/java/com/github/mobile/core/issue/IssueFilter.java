@@ -89,13 +89,13 @@ public class IssueFilter implements Serializable, Cloneable, Comparator<Label> {
      * @param label
      * @return this filter
      */
-
-    // precondition: label != null
-    // only command, no query
-    public void addLabel(Label label) {
+    public IssueFilter addLabel(Label label) {
+        if (label == null)
+            return this;
         if (labels == null)
             labels = new TreeSet<Label>(this);
         labels.add(label);
+        return this;
     }
 
     /**

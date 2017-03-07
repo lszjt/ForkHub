@@ -74,11 +74,9 @@ import com.github.mobile.ui.ConfirmDialogFragment;
 import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.HeaderFooterListAdapter;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.UriLauncherActivity;
-import com.github.mobile.ui.comment.Interface_B;
 import com.github.mobile.ui.commit.CommitCompareViewActivity;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -107,7 +105,7 @@ import org.eclipse.egit.github.core.User;
 /**
  * Fragment to display an issue
  */
-public class IssueFragment extends DialogFragment implements Interface_Comment{
+public class IssueFragment extends DialogFragment {
 
     private int issueNumber;
 
@@ -357,9 +355,8 @@ public class IssueFragment extends DialogFragment implements Interface_Comment{
 
         Activity activity = getActivity();
         loggedUser = AccountUtils.getLogin(activity);
-        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
         adapter = new HeaderFooterListAdapter<EventListAdapter>(list,
-                listAdapterFactory.newListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
+                new EventListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
         list.setAdapter(adapter);
     }
 
@@ -611,7 +608,6 @@ public class IssueFragment extends DialogFragment implements Interface_Comment{
     /**
      * Edit existing comment
      */
-    @Override
     public void editComment(Comment comment) {
         startActivityForResult(
                 CreateCommentActivity.createIntent(repositoryId, issueNumber, user, comment),
@@ -621,7 +617,6 @@ public class IssueFragment extends DialogFragment implements Interface_Comment{
     /**
      * Delete existing comment
      */
-    @Override
     public void deleteComment(Comment comment) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_COMMENT, comment);

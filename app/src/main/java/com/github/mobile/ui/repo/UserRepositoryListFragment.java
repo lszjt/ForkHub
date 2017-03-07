@@ -26,7 +26,6 @@ import android.widget.ListView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.PagedItemFragment;
 
 import java.util.List;
@@ -67,8 +66,7 @@ public abstract class UserRepositoryListFragment extends PagedItemFragment<Repos
 
     @Override
     protected SingleTypeAdapter<Repository> createAdapter(List<Repository> items) {
-        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
-        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(),
+        return new UserRepositoryListAdapter(getActivity().getLayoutInflater(),
                 items.toArray(new Repository[items.size()]), user);
     }
 

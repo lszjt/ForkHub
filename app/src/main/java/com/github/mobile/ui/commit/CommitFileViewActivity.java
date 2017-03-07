@@ -53,16 +53,16 @@ import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.util.EncodingUtils;
-import com.github.mobile.ui.FileViewActivity;
+
 /**
  * Activity to display the contents of a file in a commit
  */
-
 public class CommitFileViewActivity extends BaseActivity implements
-        LoaderCallbacks<CharSequence>, FileViewActivity {
+        LoaderCallbacks<CharSequence> {
 
     private static final String TAG = "CommitFileViewActivity";
 
+    private static final String ARG_TEXT = "text";
 
     /**
      * Create intent to show file in commit
@@ -90,16 +90,27 @@ public class CommitFileViewActivity extends BaseActivity implements
 
     private String path;
 
+    private String file;
 
     private boolean isMarkdownFile;
 
+    private String renderedMarkdown;
+
+    private Blob blob;
+
+    private ProgressBar loadingBar;
+
+    private WebView codeView;
 
     private SourceEditor editor;
 
+    private MenuItem markdownItem;
 
     @Inject
     private AvatarLoader avatars;
 
+    @Inject
+    private HttpImageGetter imageGetter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,24 +211,52 @@ public class CommitFileViewActivity extends BaseActivity implements
         }
     }
 
+    @Override
+    public Loader<CharSequence> onCreateLoader(int loader, Bundle args) {
+        final String raw = args.getString(ARG_TEXT);
+        return new MarkdownLoader(this, null, raw, imageGetter, false);
+    }
 
+    @Override
+    public void onLoadFinished(Loader<CharSequence> loader,
+            CharSequence rendered) {
+        if (rendered == null)
+            ToastUtils.show(this, R.string.error_rendering_markdown);
+
+        ViewUtils.setGone(loadingBar, true);
+        ViewUtils.setGone(codeView, false);
+
+        if (!TextUtils.isEmpty(rendered)) {
+            renderedMarkdown = rendered.toString();
+            if (markdownItem != null)
+                markdownItem.setEnabled(true);
+            editor.setMarkdown(true).setSource(file, renderedMarkdown, false);
+        }
+    }
 
     @Override
     public void onLoaderReset(Loader<CharSequence> loader) {
     }
 
-    @Override
-    public void shareFile() {
+    private void shareFile() {
         String id = repo.generateId();
         startActivity(ShareUtils.create(
                 path + " at " + CommitUtils.abbreviate(commit) + " on " + id,
                 "https://github.com/" + id + "/blob/" + commit + '/' + path));
     }
 
+    private void loadMarkdown() {
+        ViewUtils.setGone(loadingBar, false);
+        ViewUtils.setGone(codeView, true);
 
+        String markdown = new String(
+                EncodingUtils.fromBase64(blob.getContent()));
+        Bundle args = new Bundle();
+        args.putCharSequence(ARG_TEXT, markdown);
+        getSupportLoaderManager().restartLoader(0, args, this);
+    }
 
-    @Override
-    public void loadContent() {
+    private void loadContent() {
         new RefreshBlobTask(repo, sha, this) {
 
             @Override

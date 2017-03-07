@@ -50,7 +50,6 @@ import com.github.mobile.core.gist.StarGistTask;
 import com.github.mobile.core.gist.UnstarGistTask;
 import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.HeaderFooterListAdapter;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.comment.CommentListAdapter;
 import com.github.mobile.util.AvatarLoader;
@@ -150,10 +149,8 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
         progress = finder.find(R.id.pb_loading);
 
         Activity activity = getActivity();
-
-        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
-                listAdapterFactory.newListAdapter(activity.getLayoutInflater(), avatars, imageGetter));
+                new CommentListAdapter(activity.getLayoutInflater(), avatars, imageGetter));
         list.setAdapter(adapter);
     }
 

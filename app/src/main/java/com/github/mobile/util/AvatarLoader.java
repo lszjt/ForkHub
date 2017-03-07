@@ -26,7 +26,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.github.mobile.R;
-import com.github.mobile.ui.comment.Interface_B;
 import com.google.inject.Inject;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -45,7 +44,7 @@ import roboguice.util.RoboAsyncTask;
 /**
  * Avatar utilities
  */
-public class AvatarLoader implements Interface_B {
+public class AvatarLoader {
     private static final String TAG = "AvatarLoader";
 
     private static final float CORNER_RADIUS_IN_DIP = 3;
@@ -91,7 +90,6 @@ public class AvatarLoader implements Interface_B {
      * @param actionBar An ActionBar object on which you're placing the user's avatar.
      * @param user      An AtomicReference that points to the desired user.
      */
-
     public void bind(final ActionBar actionBar, final User user) {
         bind(actionBar, new AtomicReference<User>(user));
     }
@@ -178,7 +176,6 @@ public class AvatarLoader implements Interface_B {
      * @param view The ImageView that is to display the user's avatar.
      * @param user A User object that points to the desired user.
      */
-    @Override
     public void bind(final ImageView view, final User user) {
         bind(view, getAvatarUrl(user));
     }

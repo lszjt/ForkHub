@@ -28,7 +28,6 @@ import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.core.user.RefreshUserTask;
 import com.github.mobile.ui.ItemListFragment;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
@@ -86,8 +85,7 @@ public class RepositoryContributorsFragment extends ItemListFragment<Contributor
 
     @Override
     protected SingleTypeAdapter<Contributor> createAdapter(List<Contributor> items) {
-        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
-        return listAdapterFactory.newListAdapter(getActivity(),
+        return new ContributorListAdapter(getActivity(),
                 items.toArray(new Contributor[items.size()]), avatars);
     }
 

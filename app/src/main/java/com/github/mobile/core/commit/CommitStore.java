@@ -68,8 +68,14 @@ public class CommitStore extends ItemStore {
             RepositoryCommit commit) {
         RepositoryCommit current = getCommit(repo, commit.getSha());
         if (current != null) {
-            // complex calling sequence
-            current = copyCommit(commit, current);
+            current.setAuthor(commit.getAuthor());
+            current.setCommit(commit.getCommit());
+            current.setCommitter(commit.getCommitter());
+            current.setFiles(commit.getFiles());
+            current.setParents(commit.getParents());
+            current.setSha(commit.getSha());
+            current.setStats(commit.getStats());
+            current.setUrl(commit.getUrl());
             return current;
         } else {
             String repoId = repo.generateId();
@@ -81,20 +87,6 @@ public class CommitStore extends ItemStore {
             repoCommits.put(commit.getSha(), commit);
             return commit;
         }
-    }
-
-    private RepositoryCommit copyCommit(RepositoryCommit from, RepositoryCommit to) {
-
-        to.setAuthor(from.getAuthor());
-        to.setCommit(from.getCommit());
-        to.setCommitter(from.getCommitter());
-        to.setFiles(from.getFiles());
-        to.setParents(from.getParents());
-        to.setSha(from.getSha());
-        to.setStats(from.getStats());
-        to.setUrl(from.getUrl());
-
-        return to;
     }
 
     /**

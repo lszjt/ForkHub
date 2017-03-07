@@ -47,7 +47,6 @@ import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.core.issue.IssuePager;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.persistence.AccountDataManager;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
@@ -313,8 +312,7 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
 
     @Override
     protected SingleTypeAdapter<Issue> createAdapter(List<Issue> items) {
-        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
-        return listAdapterFactory.newListAdapter(
+        return new RepositoryIssueListAdapter(
                 getActivity().getLayoutInflater(),
                 getActivity().getResources(),
                 items.toArray(new Issue[items.size()]), avatars);

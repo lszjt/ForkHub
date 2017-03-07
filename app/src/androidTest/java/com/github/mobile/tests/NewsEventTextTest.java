@@ -37,7 +37,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.github.mobile.R;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.user.NewsListAdapter;
 import com.github.mobile.util.AvatarLoader;
 
@@ -69,8 +68,6 @@ public class NewsEventTextTest extends InstrumentationTestCase {
     private NewsListAdapter adapterWithRepoName;
     private NewsListAdapter adapterWithoutRepoName;
 
-    private ListAdapterFactory listAdapterFactory;
-
     private TextView text;
 
     private User actor;
@@ -87,11 +84,10 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         actor = new User().setLogin("user");
         repo = new EventRepository().setName("user/repo");
 
-        listAdapterFactory = new ListAdapterFactory();
         Context context = getInstrumentation().getTargetContext();
-        adapterWithRepoName = listAdapterFactory.newListAdapter(LayoutInflater.from(context),
+        adapterWithRepoName = new NewsListAdapter(LayoutInflater.from(context),
                 new AvatarLoader(context));
-        adapterWithoutRepoName = listAdapterFactory.newListAdapter(LayoutInflater.from(context),
+        adapterWithoutRepoName = new NewsListAdapter(LayoutInflater.from(context),
                 new Event[0], new AvatarLoader(context), false);
     }
 

@@ -78,10 +78,6 @@ public class GistStore extends ItemStore {
     public Gist addGist(Gist gist) {
         Gist current = getGist(gist.getId());
         if (current != null) {
-
-            // TODO:
-            // setGist(gist);
-            // complex calling sequence
             current.setComments(gist.getComments());
             current.setDescription(gist.getDescription());
             current.setFiles(sortFiles(gist));

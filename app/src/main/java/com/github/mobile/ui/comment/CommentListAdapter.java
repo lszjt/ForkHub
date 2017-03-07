@@ -32,7 +32,7 @@ import org.eclipse.egit.github.core.Comment;
  */
 public class CommentListAdapter extends SingleTypeAdapter<Comment> {
 
-    private final Interface_B avatars;
+    private final AvatarLoader avatars;
 
     private final HttpImageGetter imageGetter;
 

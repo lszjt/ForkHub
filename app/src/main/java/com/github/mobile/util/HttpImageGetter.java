@@ -99,20 +99,16 @@ public class HttpImageGetter implements ImageGetter {
         loading = new LoadingImageGetter(context, 24);
     }
 
-
-    // precondition:  !TextUtils.isEmpty(html)
     private HttpImageGetter show(final TextView view, final CharSequence html) {
+        if (TextUtils.isEmpty(html))
+            return hide(view);
 
-        //DoC： repeat validation: html == null
-        //if (TextUtils.isEmpty(html))
-        //   return hide(view);
         view.setText(html);
         view.setVisibility(VISIBLE);
         view.setTag(null);
         return this;
     }
 
-    // precondition: TextUtils.isEmpty(html)
     private HttpImageGetter hide(final TextView view) {
         view.setText(null);
         view.setVisibility(GONE);
@@ -171,8 +167,7 @@ public class HttpImageGetter implements ImageGetter {
             else {
                 rawHtmlCache.remove(id);
                 fullHtmlCache.put(id, encoded);
-                if (encoded != null)
-                    return show(view, encoded);
+                return show(view, encoded);
             }
         }
 
@@ -193,11 +188,7 @@ public class HttpImageGetter implements ImageGetter {
                 fullHtmlCache.put(id, html);
 
                 if (id.equals(view.getTag()))
-                    if (TextUtils.isEmpty(html)) {
-                        hide(view);
-                    }
                     show(view, html);
-
             }
         }.execute();
         return this;

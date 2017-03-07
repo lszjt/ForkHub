@@ -24,7 +24,6 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.ui.ItemListFragment;
-import com.github.mobile.ui.ListAdapterFactory;
 import com.github.mobile.ui.user.OrganizationSelectionListener;
 import com.github.mobile.ui.user.OrganizationSelectionProvider;
 import com.google.inject.Inject;
@@ -95,8 +94,7 @@ public class TeamListFragment extends ItemListFragment<Team> implements
     @Override
     protected SingleTypeAdapter<Team> createAdapter(List<Team> items) {
         Team[] teams = items.toArray(new Team[items.size()]);
-        ListAdapterFactory listAdapterFactory = new ListAdapterFactory();
-        return listAdapterFactory.newListAdapter(getActivity().getLayoutInflater(), teams);
+        return new TeamListAdapter(getActivity().getLayoutInflater(), teams);
     }
 
     @Override
