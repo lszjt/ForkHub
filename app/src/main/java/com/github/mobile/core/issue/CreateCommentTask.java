@@ -93,7 +93,6 @@ public class CreateCommentTask extends ProgressDialogTask<Comment> {
         super.onException(e);
 
         //Log.d(TAG, "Exception creating comment on issue", e);
-
-        ToastUtils.show((Activity) getContext(), e.getMessage());
+        //ToastUtils.show((Activity) getContext(), e.getMessage());
     }
 }

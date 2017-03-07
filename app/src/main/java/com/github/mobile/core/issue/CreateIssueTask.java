@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.github.mobile.R;
+import com.github.mobile.apectj.Ex;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
@@ -78,10 +79,11 @@ public class CreateIssueTask extends ProgressDialogTask<Issue> {
     }
 
     @Override
+    @Ex(tag = TAG, msg = "Exception creating issue")
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.e(TAG, "Exception creating issue", e);
-        ToastUtils.show((Activity) getContext(), e.getMessage());
+//        Log.e(TAG, "Exception creating issue", e);
+//        ToastUtils.show((Activity) getContext(), e.getMessage());
     }
 }

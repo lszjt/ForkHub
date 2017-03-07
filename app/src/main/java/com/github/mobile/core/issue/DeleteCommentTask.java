@@ -21,6 +21,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.R;
+import com.github.mobile.apectj.Ex;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
@@ -79,11 +80,12 @@ public class DeleteCommentTask extends ProgressDialogTask<Comment> {
     }
 
     @Override
+    @Ex(tag = TAG, msg = "Exception deleting comment on issue")
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.d(TAG, "Exception deleting comment on issue", e);
-
-        ToastUtils.show((Activity) getContext(), e.getMessage());
+//        Log.d(TAG, "Exception deleting comment on issue", e);
+//
+//        ToastUtils.show((Activity) getContext(), e.getMessage());
     }
 }
