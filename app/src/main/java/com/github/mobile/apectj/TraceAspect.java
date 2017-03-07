@@ -12,10 +12,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class TraceAspect {
     private static final String POINTCUT_METHOD =
-            "execution(@org.android10.gintonic.annotation.DebugTrace * *(..))";
+            "execution(@org.github.mobile.aspectj.DebugTrace * *(..))";
 
     private static final String POINTCUT_CONSTRUCTOR =
-            "execution(@org.android10.gintonic.annotation.DebugTrace *.new(..))";
+            "execution(@org.github.mobile.aspectj.DebugTrace *.new(..))";
 
     @Pointcut(POINTCUT_METHOD)
     public void methodAnnotatedWithDebugTrace() {}
