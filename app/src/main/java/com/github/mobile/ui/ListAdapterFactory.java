@@ -59,7 +59,9 @@ public class ListAdapterFactory {
                                           final AvatarLoader avatars) {
         return new UserListAdapter(inflater, elements, avatars);
     }
-
+    
+    
+    // news
     public NewsListAdapter newListAdapter(LayoutInflater inflater,
                                           Event[] elements,
                                           AvatarLoader avatars) {
@@ -179,3 +181,10 @@ public class ListAdapterFactory {
     }
 
 }
+
+
+
+
+
+
+
